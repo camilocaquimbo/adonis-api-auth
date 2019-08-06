@@ -1,0 +1,19 @@
+{
+	"sqltools.connections": [
+		{
+			"askForPassword": false,
+			"connectionTimeout": 29979,
+			"database": "jobpostr",
+			"dialect": "MySQL",
+			"name": "jobpostr",
+			"port": 3306,
+			"server": "127.0.0.1",
+			"username": "root"
+		},
+		{
+			"database": ".\\database\\my.db.sqlite",
+			"dialect": "SQLite",
+			"name": "adonis-api-auth"
+		}
+	]
+}
