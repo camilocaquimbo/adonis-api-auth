@@ -13,7 +13,8 @@ class AuthController {
 		user.password = password
 
 		user = await user.save()
-		let accessToken = await auth.generate(user)
+		let thisuser = await User.findBy('email', email)
+		let accessToken = await auth.generate(thisuser)
 		return response.json({ "user": user, "access_token": accessToken })
 	}
 
