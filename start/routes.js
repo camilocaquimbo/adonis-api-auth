@@ -17,3 +17,11 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+Route.put('/api/contacts/:id', 'ContactController.update').middleware('auth')
+Route.delete('/api/contacts/id', 'ContactController.destroy').middleware('auth')
+Route.post('/api/contacts', 'ContactController.store').middleware('auth')
+Route.get('/api/contacts', 'ContactController.index')
+
+Route.post('/auth/register', 'AuthController.register')
+Route.post('/auth/login', 'AuthController.login')

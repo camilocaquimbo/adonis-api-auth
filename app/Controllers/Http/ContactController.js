@@ -1,4 +1,5 @@
 'use strict'
+const Contact = use('App/Models/Contact');
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -18,6 +19,8 @@ class ContactController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let contacts = await Contact.query().with('user').fetch()
+    return response.json(contacts)
   }
 
   /**
@@ -41,6 +44,19 @@ class ContactController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const name = request.input('name')
+    const email = request.input('email')
+    const title = request.input('title')
+    const tel = request.input('tel')
+
+    const contact = new Contact()
+    contact.name = name
+    contact.email = email
+    contact.title = title
+    contact.tel = tel
+
+    await contact.save()
+    return response.json(contact)
   }
 
   /**
@@ -76,6 +92,19 @@ class ContactController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const name = request.input('name')
+    const email = request.input('email')
+    const title = request.input('title')
+    const tel = request.input('tel')
+
+    let contact = await Contact.find(params.id)
+
+    contact.name = name
+    contact.email = email
+    contact.title = title
+    contact.tel = tel
+    await contact.save()
+    return response.json(contact)
   }
 
   /**
@@ -87,6 +116,8 @@ class ContactController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    await Contact.find(params.id).delete()
+    return response.json({ message: 'Contact deleted!' })
   }
 }
 
