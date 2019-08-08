@@ -29,3 +29,6 @@ Run the following command to run startup migrations.
 ```js
 adonis migration:run
 ```
+## Integrado CRUD para API y JWT AuthController
+
+https://www.techiediaries.com/adonis-jwt-authentication/
